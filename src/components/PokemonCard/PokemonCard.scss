@@ -1,0 +1,20 @@
+@import '../../main';
+
+.pokemon-card{
+    border-radius: 2px;
+    border: 1px solid lightgrey;
+    margin: 2rem
+}
+
+.pokemon-card img{
+    height: 20rem;
+    background-color: white;
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+    @extend %flex-all-center;
+
+    padding: 2rem;
+}

@@ -1,0 +1,33 @@
+
+@import '../../main';
+
+.browse-main-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: ' 0';
+    background-color: red;
+}
+
+.browse-container {
+    display: flex;
+    @extend %flex-all-center;
+}
+
+.button-label {
+    text-decoration: none;
+    color: white;
+}
+// container: {
+//     justifyContent: 'center',
+//     justifyItems: 'center',
+//     alignContent: 'center',
+//     alignItems: 'center'
+// },
+// barContainer: {
+//     textDecoration: 'none',
+//     color: 'white'
+// }
