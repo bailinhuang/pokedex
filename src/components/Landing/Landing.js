@@ -8,7 +8,7 @@ export const Landing = props => {
     <div className="landing-main-container">
       <h1>POKEDEX</h1>
       <h2>A mini-encyclopedia of Pokémon</h2>
-      <Link className="" to="/browse/1">
+      <Link className="" to="/browse/bulbasaur">
         <Button variant="contained" color="primary">
           Browse
         </Button>

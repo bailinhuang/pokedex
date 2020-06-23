@@ -5,10 +5,13 @@ import './PokemonCard.scss';
 
 const PokemonCard = props => {
   const {sprites, name, height, weight} = props.pokemon;
-  console.log(props);
+  let default_img = '';
+  if(sprites.front_default){
+    default_img = sprites.front_default;
+  }
   return (
     <div className='pokemon-card'>
-      <img src={sprites.front_default} alt={'picture of pokemon' + name}/>
+      <img src={default_img} alt={'picture of pokemon' + name}/>
       <div className='card-content'>
         <h1>Name: {name}</h1>
         <p>Height: {height}</p>

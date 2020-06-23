@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { NavBar } from '../AppBar/NavBar';
 import './BrowsePokemon.scss';
 import { getPokemonByID, getTotalPokemon } from '../../services/pokeapi';
 import PokemonCard from '../PokemonCard/PokemonCard';
-import { getData } from '../../services/api';
 
 export const BrowsePokemon = props => {
 
@@ -17,17 +16,31 @@ export const BrowsePokemon = props => {
   let history = useHistory();
 
   const setPokemonInformation = () => {
+    console.log('setting info');
     getTotalPokemon().then(res =>{ 
-      const list = {};
-      const map = res.results.reduce((pokeMap, obj, index) => {
-        obj.position = index;
-        pokeMap[obj.name] = obj;
-        list[index] = obj;
-        return pokeMap;
+      const map = new Map();
+      const list = res.results.map((obj, index) => {
+        if(obj){
+          obj.position = index;
+          map.set(obj.name, obj);
+          return obj;
+        }
       });
       setPokemonMap(map);
       setPokemonList(list);
     });
+  };
+
+  const changePokemon = (num) => {
+    const pokemon = pokemonMap.get(pokemonId);
+    let position = pokemon.position;
+    position += num;
+    if(position > pokemonMap.size - 1){
+      position = 0;
+    } else if(position < 0){
+      position = pokemonMap.size - 1;
+    }
+    history.push('/browse/' + pokemonList[position].name);
   };
 
   useEffect(() => {
@@ -52,11 +65,11 @@ export const BrowsePokemon = props => {
         </div>
         <div className="browse-main-container">
           <div className="browse-container">
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
               <span>Anterior</span>
             </Button>
             {pokemon && <PokemonCard pokemon={pokemon}/>}
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
               <span>Siguiente</span>
             </Button>
           </div>

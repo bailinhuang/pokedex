@@ -6,5 +6,5 @@ export const getPokemonByID = (id) => {
 };
 
 export const getTotalPokemon = () => {
-  return getData(POKEMON + '?limit=1000');
-};
+  return getData(POKEMON + '?limit=1000').then(res => res);
+};  
