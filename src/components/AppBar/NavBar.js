@@ -2,19 +2,17 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    // overflow: 'hidden',
-    // backgroundColor: '#333',
-    // position: 'fixed', /* Set the navbar to fixed position */
-    // top: '0', /* Position the navbar at the top of the page */
-    // width: '100%', /* Full width */
-    // justifyContent: 'space-between'
+    width: '100%',
+    position: 'fixed' /* Set the navbar to fixed position */
   },
   title: {
     flexGrow: 1,
@@ -64,12 +62,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NavBar = () => {
+export const NavBar = props => {
   const classes = useStyles();
+  const {changePokemon, pokemonList} = props;
 
-  const onSearch = e => {
-    console.log(e);
-  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -81,15 +77,16 @@ export const NavBar = () => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={event => onSearch(event.target.value)}
-            />
+            {pokemonList ?             
+              <Autocomplete
+                id="free-solo-demo"
+                freeSolo
+                onChange={(event, value) => changePokemon(value)}
+                options={pokemonList.map((pokemon) => pokemon.name)}
+                renderInput={(params) => (
+                  <TextField {...params} label="freeSolo" margin="normal" variant="outlined" />
+                )} 
+              /> : <></>}
           </div>
         </Toolbar>
       </AppBar>

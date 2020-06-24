@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { useParams, useHistory } from 'react-router-dom';
 import { NavBar } from '../AppBar/NavBar';
-import './BrowsePokemon.scss';
+
 import { getPokemonByID, getTotalPokemon } from '../../services/pokeapi';
 import PokemonCard from '../PokemonCard/PokemonCard';
+
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import './BrowsePokemon.scss';
 
 export const BrowsePokemon = props => {
 
@@ -31,6 +35,7 @@ export const BrowsePokemon = props => {
   };
 
   const changePokemon = (num) => {
+    if(typeof(pokemonId) === 'number') console.log(pokemonId);
     const pokemon = pokemonMap.get(pokemonId);
     let position = pokemon.position;
     position += num;
@@ -42,44 +47,49 @@ export const BrowsePokemon = props => {
     history.push('/browse/' + pokemonList[position].name);
   };
 
+  const changePokemonByName = name => {
+    if(name){
+      history.push('/browse/' + name);
+    } else{
+      history.push('/browse/404');
+    }
+  };
+
   useEffect(() => {
     if (!pokemonList || !pokemonMap) {
       setPokemonInformation();
     }
-
-  }, [history, id, pokemonId, pokemonList, pokemonMap]);
+  }, [history, pokemonList, pokemonMap]);
 
   useEffect(() => {
     if(id && id !== pokemonId){
-      setPokemonId(id);
       getPokemonByID(id).then(res => {
         if(res){
+          setPokemonId(res.name);
           setPokemon(res);
         } else{
           history.push('/404');
         }
       });
     }
-
   }, [history, id, pokemonId, pokemonList, pokemonMap]);
   
   return (
       <>      
         <div className="">
-          <NavBar />
+          <NavBar changePokemon={changePokemonByName} pokemonList={pokemonList}/>
         </div>
         <div className="browse-main-container">
           <div className="browse-container">
             <div>
               <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
-                <span>Anterior</span>
+                <NavigateBeforeIcon/>
               </Button>
               <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
-                <span>Siguiente</span>
+                <NavigateNextIcon/>
               </Button>
             </div>
             {pokemon && <PokemonCard pokemon={pokemon}/>}
-
           </div>
         </div> 
       </>
