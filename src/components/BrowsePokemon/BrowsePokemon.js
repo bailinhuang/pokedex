@@ -16,15 +16,14 @@ export const BrowsePokemon = props => {
   let history = useHistory();
 
   const setPokemonInformation = () => {
-    console.log('setting info');
     getTotalPokemon().then(res =>{ 
       const map = new Map();
       const list = res.results.map((obj, index) => {
         if(obj){
           obj.position = index;
           map.set(obj.name, obj);
-          return obj;
         }
+        return obj;
       });
       setPokemonMap(map);
       setPokemonList(list);
@@ -53,7 +52,13 @@ export const BrowsePokemon = props => {
   useEffect(() => {
     if(id && id !== pokemonId){
       setPokemonId(id);
-      getPokemonByID(id).then(res => setPokemon(res));
+      getPokemonByID(id).then(res => {
+        if(res){
+          setPokemon(res);
+        } else{
+          history.push('/404');
+        }
+      });
     }
 
   }, [history, id, pokemonId, pokemonList, pokemonMap]);
@@ -65,13 +70,16 @@ export const BrowsePokemon = props => {
         </div>
         <div className="browse-main-container">
           <div className="browse-container">
-            <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
-              <span>Anterior</span>
-            </Button>
+            <div>
+              <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
+                <span>Anterior</span>
+              </Button>
+              <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
+                <span>Siguiente</span>
+              </Button>
+            </div>
             {pokemon && <PokemonCard pokemon={pokemon}/>}
-            <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
-              <span>Siguiente</span>
-            </Button>
+
           </div>
         </div> 
       </>

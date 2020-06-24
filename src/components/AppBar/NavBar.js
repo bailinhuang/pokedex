@@ -1,30 +1,26 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
 
-import './NavBar.scss';
-const useStyles = makeStyles(theme => ({
-
-  menuButton: {
-    marginRight: theme.spacing(2)
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    // overflow: 'hidden',
+    // backgroundColor: '#333',
+    // position: 'fixed', /* Set the navbar to fixed position */
+    // top: '0', /* Position the navbar at the top of the page */
+    // width: '100%', /* Full width */
+    // justifyContent: 'space-between'
   },
   title: {
-    flexGrow: 1
-  }, 
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
     },
   },
   search: {
@@ -32,15 +28,14 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(3),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto'
-    }
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -49,27 +44,51 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '18ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
 }));
 
-export const NavBar = props => {
-  // const classes = useStyles();
+export const NavBar = () => {
+  const classes = useStyles();
+
+  const onSearch = e => {
+    console.log(e);
+  };
   return (
-    <div className="navbar">
+    <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className="">
-            PokéDex
+          <Typography className={classes.title} variant="h6" noWrap>
+            PokeDex
           </Typography>
-          <div className="search">
-            <div className="">
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"
-              
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={event => onSearch(event.target.value)}
             />
           </div>
         </Toolbar>

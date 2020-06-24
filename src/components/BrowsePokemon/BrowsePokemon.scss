@@ -14,7 +14,13 @@
 
 .browse-container {
     display: flex;
+    flex-direction: column;
     @extend %flex-all-center;
+    width: 100%;
+}
+
+.browse-container button{
+    margin: 0 2rem;
 }
 
 .button-label {
