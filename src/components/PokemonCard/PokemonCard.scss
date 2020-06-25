@@ -19,5 +19,12 @@
 }
 
 .pokemon-information-container{
+    display: flex;
+    flex-direction: column;
+    @extend %flex-all-center;
     margin-top: 2rem;
+    width: 100%;
+    padding: 1rem 0;
+    color: black;;
+    background-color: lightgray;
 }

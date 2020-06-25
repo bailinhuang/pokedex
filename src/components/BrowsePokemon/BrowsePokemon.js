@@ -87,7 +87,8 @@ export const BrowsePokemon = props => {
         <div className="browse-main-container">
           <div className="browse-container">
 
-            {pokemon && <PokemonCard pokemon={pokemon}/>}            {pokemonMap ?             
+            {pokemon && <PokemonCard pokemon={pokemon}/>}            
+            {pokemonMap ?             
               <div>
                 <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
                   <NavigateBeforeIcon/>
