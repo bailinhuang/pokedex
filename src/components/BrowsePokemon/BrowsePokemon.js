@@ -86,15 +86,16 @@ export const BrowsePokemon = props => {
         </div>
         <div className="browse-main-container">
           <div className="browse-container">
-            {pokemonMap ?             <div>
-              <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
-                <NavigateBeforeIcon/>
-              </Button>
-              <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
-                <NavigateNextIcon/>
-              </Button>
-            </div> : <p>Loading...</p>}
-            {pokemon && <PokemonCard pokemon={pokemon}/>}
+
+            {pokemon && <PokemonCard pokemon={pokemon}/>}            {pokemonMap ?             
+              <div>
+                <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
+                  <NavigateBeforeIcon/>
+                </Button>
+                <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
+                  <NavigateNextIcon/>
+                </Button>
+              </div> : <p>Loading...</p>}
           </div>
         </div> 
       </>
