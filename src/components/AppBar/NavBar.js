@@ -3,7 +3,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -85,7 +84,7 @@ export const NavBar = props => {
                 onChange={(event, value) => changePokemon(value)}
                 options={pokemonList.map((pokemon) => pokemon.name)}
                 renderInput={(params) => (
-                  <TextField {...params} label="Search" margin="normal" variant="outlined" classes={{root: classes.inputRoot, input: classes.inputInput}} />
+                  <TextField {...params} label="Search" margin="normal" variant="outlined" classes={{root: classes.inputRoot}} />
                 )} 
               /> : <></>}
           </div>

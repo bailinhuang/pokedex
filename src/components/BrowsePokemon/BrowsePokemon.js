@@ -14,11 +14,12 @@ export const BrowsePokemon = props => {
 
   const [pokemonId, setPokemonId] = useState('');
   const [pokemon, setPokemon] = useState();
-  const [pokemonList, setPokemonList] = useState();
-  const [pokemonMap, setPokemonMap] = useState();
+  const [pokemonList, setPokemonList] = useState(); //Pokemon List ordered by their position which has pokemon name, url and position
+  const [pokemonMap, setPokemonMap] = useState(); //Map of the same information, but with name as the key. 
   const {id} = useParams();
   let history = useHistory();
 
+  //Loads the information of the pokemon list in the API. 
   const setPokemonInformation = () => {
     getTotalPokemon().then(res =>{ 
       const map = new Map();
@@ -34,6 +35,7 @@ export const BrowsePokemon = props => {
     });
   };
 
+  //Changes the pokemon with the arrows by stepping up or down num positions.
   const changePokemon = (num) => {
     if(typeof(pokemonId) === 'number') console.log(pokemonId);
     const pokemon = pokemonMap.get(pokemonId);
@@ -47,6 +49,7 @@ export const BrowsePokemon = props => {
     history.push('/browse/' + pokemonList[position].name);
   };
 
+  //Changes the pokemon by name, used in search. 
   const changePokemonByName = name => {
     name = name.trim();
     if(name){
@@ -62,11 +65,11 @@ export const BrowsePokemon = props => {
     }
   }, [history, pokemonList, pokemonMap]);
 
+  //Gets the pokemon either by position or by name
   useEffect(() => {
     if(id && id !== pokemonId){
       getPokemonByID(id).then(res => {
         if(res){
-          console.log(res);
           setPokemonId(res.name);
           setPokemon(res);
         } else{
@@ -74,7 +77,7 @@ export const BrowsePokemon = props => {
         }
       });
     }
-  }, [history, id, pokemonId, pokemonList, pokemonMap]);
+  }, [history, id, pokemon, pokemonId, pokemonList, pokemonMap]);
   
   return (
       <>      

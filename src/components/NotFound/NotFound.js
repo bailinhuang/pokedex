@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     color: 'white'
   }
 }));
+
 export const NotFound = props => {
   const classes = useStyles();
   return (
