@@ -48,10 +48,11 @@ export const BrowsePokemon = props => {
   };
 
   const changePokemonByName = name => {
+    name = name.trim();
     if(name){
       history.push('/browse/' + name);
     } else{
-      history.push('/browse/404');
+      history.push('/404');
     }
   };
 
@@ -65,6 +66,7 @@ export const BrowsePokemon = props => {
     if(id && id !== pokemonId){
       getPokemonByID(id).then(res => {
         if(res){
+          console.log(res);
           setPokemonId(res.name);
           setPokemon(res);
         } else{
@@ -81,14 +83,14 @@ export const BrowsePokemon = props => {
         </div>
         <div className="browse-main-container">
           <div className="browse-container">
-            <div>
+            {pokemonMap ?             <div>
               <Button variant="contained" color="primary" onClick={() => changePokemon(-1)}>
                 <NavigateBeforeIcon/>
               </Button>
               <Button variant="contained" color="primary" onClick={() => changePokemon(1)}>
                 <NavigateNextIcon/>
               </Button>
-            </div>
+            </div> : <p>Loading...</p>}
             {pokemon && <PokemonCard pokemon={pokemon}/>}
           </div>
         </div> 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './PokemonCard.scss';
 import question_img from '../../assets/question.jpg';
@@ -7,7 +6,7 @@ import question_img from '../../assets/question.jpg';
 const PokemonCard = props => {
   const {sprites, name, height, weight} = props.pokemon;
   let default_img = question_img;
-  if(sprites.front_default){
+  if(sprites){
     default_img = sprites.front_default;
   } 
   return (
@@ -20,10 +19,6 @@ const PokemonCard = props => {
       </div>
     </div>
   );
-};
-
-PokemonCard.propTypes = {
-
 };
 
 export default PokemonCard;

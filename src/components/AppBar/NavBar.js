@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    position: 'fixed' /* Set the navbar to fixed position */
+    position: 'fixed' 
   },
   title: {
     flexGrow: 1,
@@ -74,17 +74,18 @@ export const NavBar = props => {
             PokeDex
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
             {pokemonList ?             
               <Autocomplete
                 id="free-solo-demo"
                 freeSolo
+                classes={{
+                  root: classes.inputRoot,
+                  inputRoot: classes.inputInput,
+                }}
                 onChange={(event, value) => changePokemon(value)}
                 options={pokemonList.map((pokemon) => pokemon.name)}
                 renderInput={(params) => (
-                  <TextField {...params} label="freeSolo" margin="normal" variant="outlined" />
+                  <TextField {...params} label="Search" margin="normal" variant="outlined" classes={{root: classes.inputRoot, input: classes.inputInput}} />
                 )} 
               /> : <></>}
           </div>

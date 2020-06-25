@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     @extend %flex-all-center;
+    padding-top: 6rem;
     width: 100%;
 }
 
@@ -27,13 +28,3 @@
     text-decoration: none;
     color: white;
 }
-// container: {
-//     justifyContent: 'center',
-//     justifyItems: 'center',
-//     alignContent: 'center',
-//     alignItems: 'center'
-// },
-// barContainer: {
-//     textDecoration: 'none',
-//     color: 'white'
-// }
