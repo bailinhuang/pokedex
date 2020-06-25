@@ -2,9 +2,8 @@
 
 .pokemon-card{
     border-radius: 2px;
-    border: 1px solid lightgrey;
+    border: 4px solid lightgrey;
     margin: 2rem;
-    // background-color: white;
 }
 
 .pokemon-card img{
@@ -17,4 +16,8 @@
     flex-direction: column;
     @extend %flex-all-center;
     padding: 2rem;
+}
+
+.pokemon-information-container{
+    margin-top: 2rem;
 }
